@@ -1,0 +1,21 @@
+#tomcat
+server:
+  port: 2002
+
+spring:
+  application:
+    name: alibaba-seata-storage
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        namespace: 193ac25a-a007-4113-9bee-2d852363444c  #dev命名空间
+    alibaba:
+      seata:
+        tx-service-group: mytx_group  #自定义事务组名称，要与seata-server的配置对应
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/seata_storage?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
