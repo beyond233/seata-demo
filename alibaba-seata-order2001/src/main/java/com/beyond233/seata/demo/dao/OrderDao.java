@@ -27,9 +27,10 @@ public class OrderDao {
      * @since 2020/11/1 22:29
      */
     public Integer create(Order order) {
-        return iInsert(new ScalarHandler<Number>(),
+        Number id = iInsert(new ScalarHandler<Number>(),
                 "INSERT INTO `order`(user_id,commodity_code,count,money,`status`) VALUE(?,?,?,?,0)",
                 param(order.getUserId(), order.getCommodityCode(), order.getCount(), order.getMoney()));
+        return id.intValue();
     }
 
     /**
@@ -42,7 +43,7 @@ public class OrderDao {
      * @since 2020/11/1 22:31
      */
     public Integer updateOrder(Integer orderId, Integer status) {
-        return iUpdate("UPDATE order SET status=? where order_id=?", param(status, orderId));
+        return iUpdate("UPDATE `order` SET `status`=? WHERE id=?", param(status, orderId));
     }
 
 }

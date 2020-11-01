@@ -29,7 +29,7 @@ public class AccountDao {
         if (money < 0) {
             throw new RuntimeException();
         }
-        return iUpdate("UPDATE account SET money=money - ? WHERE user_id=?", param(money, userId));
+        return iUpdate("UPDATE account SET money=? WHERE user_id=?", param(money, userId));
     }
 
     /**
