@@ -27,4 +27,10 @@ public class OrderController {
         orderService.create(order);
         return Result.success(order);
     }
+
+    @PostMapping("/create/jboss")
+    public Result<Order> getOrderByJboss(@RequestBody Order order){
+        orderService.createByJboss(order);
+        return Result.success(order);
+    }
 }

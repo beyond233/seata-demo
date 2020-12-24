@@ -5,7 +5,9 @@ import com.beyond233.seata.demo.pojo.Storage;
 import com.beyond233.springcloud.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.ws.rs.Consumes;
@@ -16,7 +18,7 @@ import javax.ws.rs.Produces;
 /**
  * todo
  *
- * @author XuJie
+ * @author beyond233
  * @date 2020/12/24 17:13
  */
 @RestController
@@ -28,7 +30,7 @@ public class JbossController {
     private StorageDao storageDao;
 
     @POST
-    @Path("/decrease")
+    @Path("/decrease/jboss")
     @Consumes(MediaType.APPLICATION_JSON_VALUE)
     @Produces(MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result decrease(@RequestBody Storage storage) {

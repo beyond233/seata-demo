@@ -45,12 +45,30 @@ public class OrderService {
         Integer orderId = orderDao.create(order);
 
         log.info("---->扣减库存:开始");
-//        storageRpc.decrease(order.getCommodityCode(), order.getCount());
-        storageRestRpc.decrease(order.getCommodityCode(), order.getCount());
+        storageRpc.decrease(order.getCommodityCode(), order.getCount());
         log.info("---->扣减库存:结束");
 
         log.info("---->扣减余额:开始");
-//        accountRpc.decrease(order.getUserId(), order.getMoney());
+        accountRpc.decrease(order.getUserId(), order.getMoney());
+        log.info("---->扣减余额:结束");
+
+        log.info("---->状态更新:开始");
+        orderDao.updateOrder(orderId, 1);
+        log.info("---->状态更新:结束");
+
+        log.info("---->创建订单:结束");
+    }
+
+    @GlobalTransactional(name = "创建订单Service", rollbackFor = Exception.class)
+    public void createByJboss(Order order) {
+        log.info("---->创建订单:开始");
+        Integer orderId = orderDao.create(order);
+
+        log.info("---->扣减库存:开始");
+        storageRestRpc.decreaseByJboss(order.getCommodityCode(), order.getCount());
+        log.info("---->扣减库存:结束");
+
+        log.info("---->扣减余额:开始");
         accountRestRpc.decrease(order.getUserId(), order.getMoney());
         log.info("---->扣减余额:结束");
 
