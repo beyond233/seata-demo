@@ -17,12 +17,12 @@ import javax.sql.DataSource;
  * @author beyond233
  * @since 2020/10/8 20:22
  */
-@Configuration
+//@Configuration
 public class DataSourceProxyConfig {
 
     /**
      * 构建Hikari数据源
-     * */
+     */
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource.hikari")
     public DataSource hikariDataSource() {
@@ -32,7 +32,7 @@ public class DataSourceProxyConfig {
 
     /**
      * seata代理Hikari数据源
-     * */
+     */
     @Bean
     public DataSourceProxy dataSourceProxy(@Qualifier("hikariDataSource") DataSource dataSource) {
         return new DataSourceProxy(dataSource);
@@ -52,7 +52,6 @@ public class DataSourceProxyConfig {
         ctx.setAllowShowSQL(true);
         return ctx;
     }
-
 
 
 }

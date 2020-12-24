@@ -9,16 +9,54 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
-        namespace: 193ac25a-a007-4113-9bee-2d852363444c  #dev命名空间
-    alibaba:
-      seata:
-        tx-service-group: mytx_group  #自定义事务组名称，要与seata-server的配置对应
   datasource:
+    url: jdbc:mysql://localhost:3306/seata_account?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true&serverTimezone=UTC
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+    initialization-mode: always
+    type: com.zaxxer.hikari.HikariDataSource
     hikari:
-      jdbc-url: jdbc:mysql://localhost:3306/seata_account?useUnicode=true&characterEncoding=utf-8&useSSL=false
-      username: root
-      password: root
-      driver-class-name: com.mysql.jdbc.Driver
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: HikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
 
 
 
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: seata_tx_group
+  enable-auto-data-source-proxy: true
+  data-source-proxy-mode: AT
+  service:
+    grouplist:
+      default: localhost:8091
+    vgroup-mapping:
+      seata_tx_group: default
+  config:
+    type: nacos
+    nacos:
+      namespace: ""
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      namespace: ""
+      username: nacos
+      password: nacos
+
+logging:
+  level:
+    com.alibaba.nacos.client.*: WARN
