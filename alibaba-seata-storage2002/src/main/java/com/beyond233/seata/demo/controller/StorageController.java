@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * 描述: StorageController 控制器类
@@ -17,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  * @author beyond233
  * @since 2020/10/8 21:38
  */
-@RestController
+//@RestController
 @RequestMapping("/storage")
 @Slf4j(topic = "库存服务")
 public class StorageController {

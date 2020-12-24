@@ -18,6 +18,12 @@ public class StorageRestRpc {
     private RestTemplate template;
 
     public void decrease(String commodityCode, Integer count) {
-        template.postForEntity("http://alibaba-seata-storage/storage/decrease?commodityCode={commodityCode}&count={count}", null, Result.class, commodityCode, count);
+        template.postForEntity("http://alibaba-seata-storage/storage/decrease?commodityCode={commodityCode}&count={count}",
+                null, Result.class, commodityCode, count);
+    }
+
+    public void decreaseForJboss(String commodityCode, Integer count) {
+        template.postForEntity("http://alibaba-seata-storage/storage/decrease?commodityCode={commodityCode}&count={count}",
+                null, Result.class, commodityCode, count);
     }
 }
