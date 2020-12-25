@@ -3,6 +3,7 @@ package com.beyond233.seata.demo.controller;
 import com.beyond233.seata.demo.dao.StorageDao;
 import com.beyond233.seata.demo.pojo.Storage;
 import com.beyond233.springcloud.entity.Result;
+import io.seata.core.context.RootContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 
 /**
  * todo
@@ -33,7 +36,10 @@ public class JbossController {
     @Path("/decrease/jboss")
     @Consumes(MediaType.APPLICATION_JSON_VALUE)
     @Produces(MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Result decrease(@RequestBody Storage storage) {
+    public Result decrease(@RequestBody Storage storage, @Context HttpServletRequest request) {
+        String rpcXid = request.getHeader(RootContext.KEY_XID);
+        String xid = RootContext.getXID();
+        RootContext.bind(rpcXid);
         Integer result = storageDao.decrease(storage.getCommodityCode(), storage.getCount());
         return result == 1 ? Result.success(1) : Result.fail(0);
     }
