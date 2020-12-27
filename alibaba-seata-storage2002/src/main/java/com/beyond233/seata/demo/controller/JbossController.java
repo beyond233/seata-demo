@@ -39,7 +39,7 @@ public class JbossController {
     public Result decrease(@RequestBody Storage storage, @Context HttpServletRequest request) {
         String rpcXid = request.getHeader(RootContext.KEY_XID);
         String xid = RootContext.getXID();
-        RootContext.bind(rpcXid);
+//        RootContext.bind(rpcXid);
         Integer result = storageDao.decrease(storage.getCommodityCode(), storage.getCount());
         return result == 1 ? Result.success(1) : Result.fail(0);
     }

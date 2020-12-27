@@ -1,8 +1,5 @@
 package com.beyond233.seata.demo.config;
 
-import com.beyond233.seata.demo.interceptor.MySeataInterceptor;
-import org.jboss.resteasy.core.AsynchronousDispatcher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
